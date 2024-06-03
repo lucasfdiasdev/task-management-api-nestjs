@@ -7,10 +7,13 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
-import { FindAllParameters, TaskDto } from './taks.dto';
 import { TaskService } from './task.service';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { FindAllParameters, TaskDto } from './taks.dto';
 
+@UseGuards(AuthGuard)
 @Controller('task')
 export class TaskController {
   constructor(private readonly tasksService: TaskService) {}
