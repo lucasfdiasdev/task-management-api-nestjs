@@ -33,4 +33,18 @@ export class TaskService {
       HttpStatus.BAD_REQUEST,
     );
   }
+
+  remove(id: string): TaskDto {
+    const taskIndex = this.tasks.findIndex((t) => t.id === id);
+
+    if (taskIndex >= 0) {
+      this.tasks.splice(taskIndex, 1)[0];
+      return;
+    }
+
+    throw new HttpException(
+      `Task ${id} does not exist`,
+      HttpStatus.BAD_REQUEST,
+    );
+  }
 }
