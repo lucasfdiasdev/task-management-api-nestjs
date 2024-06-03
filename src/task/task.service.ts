@@ -19,4 +19,18 @@ export class TaskService {
 
     throw new HttpException(`Task ${id} does not exist`, HttpStatus.NOT_FOUND);
   }
+
+  update(task: TaskDto) {
+    const taskIndex = this.tasks.findIndex((t) => t.id === task.id);
+
+    if (taskIndex >= 0) {
+      this.tasks[taskIndex] = task;
+      return;
+    }
+
+    throw new HttpException(
+      `Task ${task.id} does not exist`,
+      HttpStatus.BAD_REQUEST,
+    );
+  }
 }
